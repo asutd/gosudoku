@@ -13,25 +13,29 @@ type Value struct {
 	indexInVline int
 	hlineIndex   int
 	indexInHline int
+	s            *Sudoku
 }
 
 // Cell structure
 type Cell struct {
-	i            int
-	unknownCount int
-	values       [6]*Value
+	i             int
+	unknownCount  int
+	values        [6]*Value
+	containValues [6]*struct{}
 }
 
 type Hline struct {
-	i            int
-	unknownCount int
-	values       [6]*Value
+	i             int
+	unknownCount  int
+	values        [6]*Value
+	containValues [6]*struct{}
 }
 
 type Vline struct {
-	i            int
-	unknownCount int
-	values       [6]*Value
+	i             int
+	unknownCount  int
+	values        [6]*Value
+	containValues [6]*struct{}
 }
 
 func main() {
@@ -82,6 +86,7 @@ func (s *Sudoku) Init() {
 		{4, 10, 16, 22, 28, 34},
 		{5, 11, 17, 23, 29, 35},
 	}
+
 	s.Fill()
 	s.init = true
 }
@@ -90,6 +95,7 @@ func (s *Sudoku) Fill() {
 	for i := 0; i < 36; i++ {
 		v := Value{
 			i: i,
+			s: s,
 		}
 		s.v[i] = &v
 
