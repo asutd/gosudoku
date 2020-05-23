@@ -16,6 +16,10 @@ type Value struct {
 	s            *Sudoku
 }
 
+func (v *Value) set(value int) {
+	v.v = value
+}
+
 // Cell structure
 type Cell struct {
 	i             int
@@ -41,6 +45,7 @@ type Vline struct {
 func main() {
 	su := NewSudoku()
 	fmt.Println(su)
+	su.Generate()
 }
 
 // Sudoku main game structure
@@ -57,7 +62,7 @@ type Sudoku struct {
 
 func NewSudoku() *Sudoku {
 	su := Sudoku{}
-	su.Generate()
+	su.Init()
 	return &su
 }
 
@@ -163,8 +168,19 @@ func (s *Sudoku) Generate() {
 		s.Init()
 	}
 	for i := 0; i < 36; i++ {
-
+		v := s.generateValue(i)
+		s.SetValue(i, v)
 	}
+}
+
+func (s *Sudoku) generateValue(i int) int {
+	p := [6]*struct{}{}
+
+	return 2
+}
+
+func (s *Sudoku) SetValue(i int, v int) {
+	s.v[i].set(v)
 }
 
 // printSudoku just for debug
